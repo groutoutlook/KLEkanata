@@ -1,66 +1,68 @@
-#|
-This minimal config changes Caps Lock to act as Caps Lock on quick tap, but
-if held, it will act as Left Ctrl. It also changes the backtick/grave key to
-act as backtick/grave on quick tap, but change ijkl keys to arrow keys on hold.
-
-This text between the two pipe+octothorpe sequences is a multi-line comment.
-|#
-
-;; Text after double-semicolons are single-line comments.
-
-#|
-One defcfg entry may be added, which is used for configuration key-pairs. These
-configurations change kanata's behaviour at a more global level than the other
-configuration entries.
-|#
-
 (defcfg
-  #|
-  This configuration will process all keys pressed inside of kanata, even if
-  they are not mapped in defsrc. This is so that certain actions can activate
-  at the right time for certain input sequences. By default, unmapped keys are
-  not processed through kanata due to a Windows issue related to AltGr. If you
-  use AltGr in your keyboard, you will likely want to follow the simple.kbd
-  file while unmapping lctl and ralt from defsrc.
-  |#
+  danger-enable-cmd yes
   process-unmapped-keys yes
+  windows-altgr cancel-lctl-press
+  concurrent-tap-hold yes
 )
 
 (defsrc
-  esc  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  grv  1     2     3     4     5     6     7     8     9     0     -     =     bspc
-  tab  q     w     e     r     t     y     u     i     o     p     [     ]     \
-  caps a     s     d     f     g     h     j     k     l     ;     '     ret 
-  lsft z     x     c     v     b     n     m     ,     .     /     rsft
-  lctl lmet  lalt            spc           ralt rmet rctl
+  esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab   q      w     e     r     t     y     u     i     o     p     [     ]     \
+  caps  a      s     d     f     g     h     j     k     l     ;     '     ret 
+  lsft  z      x     c     v     b     n     m     ,     .     /     rsft
+  lctl  lmet   lalt            spc           ralt rmet rctl
 )
 
 
 (deflayer default
-  @esc  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv  1     2     3     4     5     6     7     8     9     0     -     =     bspc
-  @tab  q     w     e     r     t     y     u     i     o     p     [     ]     \
-  @cap  a     s     d     f     g     h     j     k     l     ;     '     ret 
-  @lsft z     x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl lmet  lalt            spc           ralt rmet rctl
+  @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bslash
+  @cap   a      s     d     @fnum g     h     j     k     l     ;     '     @ret 
+  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
+  @lctl  @lmet  lalt            spc           ralt rmet rctl
 )
 
 (deflayer arrows
-  @esc  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv  1     2     3     4     5     6     7     8     9     0     -     =     bspc
-  @tab  q     up    e     r     t     y     u     i     o     p     [     ]     \
-  @cap  left  down  right f     g     h     j     k     l     ;     '     ret 
-  @lsft z     x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl lmet  lalt            spc           ralt rmet rctl
+  @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bslash
+  @cap   left   down  right @fnum g     left  down  up    right ;     '     @ret 
+  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
+  @lctl  @lmet  lalt            spc           ralt rmet rctl
 )
 
+(deflayer numbers
+  @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  @grv   S-1    S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0   S--   S-=   bspc
+  0      1      2     3     4     5     6     7     8     9     0     [     ]     @bslash
+  @cap   4      5     6     @fnum g     h     j     k     l     ;     '     @ret 
+  @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft
+  @lctl  @lmet  lalt            spc           ralt rmet rctl
+)
+
+(deflayermap (lctl-layer)
+  caps esc)
+
+
 (defalias
-  esc (tap-hold-press 250 250 esc rmet)
-  cap (tap-hold-press 200 200 esc rctl)
-  tab (tap-hold-press 200 200 tab tab)
-  grv (tap-hold-press 200 200 grv (layer-while-held arrows))
-  ;; grv (tap-hold-press 200 200 grv (layer-toggle arrows))
-  lsft (tap-hold-press 150 200 enter lsft)    ;; quick tap = Enter, hold = Right Shift
-  lctl (tap-hold-press 150 200 lctl lctl)    ;; quick tap = Enter, hold = Right Shift
-  rsft (tap-hold-press 150 200 tab rsft)    ;; quick tap = Enter, hold = Right Shift
+  esc         (tap-hold-press       300 300 esc    rmet)
+  cap         (tap-hold-press       200 200 esc    rctl)
+  grv         (tap-hold-press       300 200 grv   (layer-while-held arrows))
+  ret         (tap-hold             300 300 ret   esc)
+  bslash      (tap-hold-press       250 250 \     tab)
+  fnum        (tap-hold             150 200 f     (layer-while-held numbers))
+  lsft        (tap-hold-press       230 230 enter lsft)    
+  lctl        (tap-hold             200 200 lctl  lctl)    
+  rsft        (tap-hold-press       200 200 tab   rsft)    
+  lmet        (tap-dance            250    (lmet  menu))   
+  ;; tab         (tap-hold-press 200 200 tab    tab)
+)
+
+
+(defchordsv2
+  ;; (a s)    c                200 all-released  (arrows)
+  ;; (a s d) (macro h e l l o) 250 first-release (arrows)
+  ;; (s d f) (macro b y e)     400 first-release (arrows)
 )
