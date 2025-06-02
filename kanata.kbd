@@ -12,7 +12,7 @@
   tab   q      w     e     r     t     y     u     i     o     p     [     ]     \
   caps  a      s     d     f     g     h     j     k     l     ;     '     ret 
   lsft  z      x     c     v     b     n     m     ,     .     /     rsft
-  lctl  lmet   lalt            spc           ralt rmet rctl
+  lctl  lmet   lalt              spc               ralt  rmet  rctl
 )
 
 
@@ -22,7 +22,7 @@
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bslash
   @cap   a      s     d     f     g     h     j     k     l     ;     '     @ret 
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  lalt            spc           ralt rmet rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
 )
 
 (deflayer arrows
@@ -31,7 +31,7 @@
   tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bslash
   @cap   left   down  right f     g     left  down  up    right ;     '     @ret 
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  lalt            spc           ralt rmet rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
 )
 
 (deflayer numbers
@@ -40,7 +40,7 @@
   tab    1      2     3     4     5     6     7     8     9     0     [     ]     @bslash
   @cap   4      5     6     f     g     h     j     k     l     ;     '     @ret 
   @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  lalt            spc           ralt rmet rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
 )
 
 (deflayermap (lctl-layer)
@@ -57,7 +57,9 @@
   lsft        (tap-hold-press       230 230 enter  lsft)    
   lctl        (tap-hold             200 200 lctl   lctl)    
   rsft        (tap-hold-press       200 200 tab    rsft)    
+  lalt        (tap-dance            250    (lalt   (multi lctl lalt (layer-while-held numbers))))    
   lmet        (tap-dance            250    (lmet   menu))   
+  ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
   ;; tab         (tap-hold-press 200 200 tab    tab)
 )
 
