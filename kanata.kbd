@@ -1,9 +1,17 @@
 (defcfg
   danger-enable-cmd yes
   process-unmapped-keys yes
-  windows-altgr cancel-lctl-press
+  windows-altgr add-lctl-release
   concurrent-tap-hold yes
-  override-release-on-activation yes
+  override-release-on-activation yes  
+  tooltip-layer-changes   	yes  	;;|false|
+  tooltip-show-blank      	yes  	;;|no|
+  tooltip-duration        	500  	;;|500|
+  tooltip-size              28,28	;;|24 24|
+  notify-cfg-reload       	yes  	;;|yes|
+  notify-cfg-reload-silent  yes 
+  icon-match-layer-name   	yes  	;;|yes| match layer name to icon files even without an explicit (icon name.ico) config
+;;  tray-icon base.png ;; will load C:\Users\<U>\AppData\Roaming\kanata\base.png  
 )
 
 (defsrc
@@ -22,7 +30,7 @@
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bslash
   @cap   a      s     d     f     g     h     j     k     l     ;     '     @ret 
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl
 )
 
 (deflayer arrows
@@ -31,21 +39,44 @@
   tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bslash
   @cap   left   down  right f     g     left  down  up    right ;     '     @ret 
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl
 )
 
 (deflayer numbers
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   S-1    S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0   S--   S-=   bspc
-  tab    1      2     3     4     5     6     7     8     9     0     [     ]     @bslash
+  0      1      2     3     4     5     6     7     8     9     0     [     ]     @bslash
   @cap   4      5     6     f     g     h     j     k     l     ;     '     @ret 
   @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft
-  @lctl  @lmet  @lalt             spc               ralt  rmet  rctl
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl
 )
 
-(deflayermap (lctl-layer)
-  caps esc)
+(deflayer sym-win
+  @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  @grv   S-1    S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0   S--   S-=   bspc
+  tab    1      2     3     r     t     y     u     i     9     0     S-[   S-]   @bslash
+  @cap   4      5     6     f     g     h     j     k     l     S-;   S-'     @ret 
+  @lsft  7      8     9     v     b     n     m     S-,   S-.   S-/   @rsft
+  @ctl   @rev   @lalt             spc               ralt  rmet  @rctl
+)
 
+(deflayer lctl-layer
+  @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc
+  tab    C-q    C-w   C-e   r     t     y     u     i     o     p     [     ]     @bslash
+  @cap   C-a    C-s   C-d   f     g     h     j     k     l     ;     '     @ret 
+  @lsft  C-z    C-x   C-c   v     b     n     m     ,     .     /     @rsft
+  @lctl  @rev  @lalt             spc               ralt  rmet  @rctl
+)
+
+
+;; (deflayermap (lctl-layer)
+;;  q C-q
+;;  w C-w
+;;  d C-d
+;;  z C-z
+;;  c C-c
+;;  )
 
 (defalias
   esc         (tap-hold-press       300 300 esc    rmet)
@@ -56,13 +87,18 @@
   fnum        (tap-hold             150 200 f      (layer-while-held numbers))
   lsft        (tap-hold-press       230 230 enter  lsft)    
   lctl        (tap-hold             200 200 lctl   lctl)    
+  rctl        (tap-dance            200    (rctl   menu))    
   rsft        (tap-hold-press       200 200 tab    rsft)    
   lalt        (tap-dance            250    (lalt   (multi lctl lalt (layer-while-held numbers))))    
-  lmet        (tap-dance            250    (lmet   menu))   
+  lmet        (tap-dance            250    (lmet   (layer-switch sym-win) menu lrld))   
   ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
   ;; tab         (tap-hold-press 200 200 tab    tab)
 )
 
+(defalias
+  rev         (layer-switch default)    
+  ctl         (layer-while-held lctl-layer)
+)
 (defoverrides
   ;; (lctl caps) (lctl p)
   (lctl esc) (esc)
