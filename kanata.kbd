@@ -1,4 +1,8 @@
 ;; https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs#L172 
+(defvar
+  tt-time 5000
+)
+
 (defcfg
   danger-enable-cmd yes
   process-unmapped-keys yes
@@ -7,8 +11,10 @@
   override-release-on-activation yes  
   tooltip-layer-changes   	yes  	;;|false|
   tooltip-show-blank      	yes  	;;|no|
-  tooltip-duration        	500  	;;|500|
-  tooltip-size              28,28	;;|24 24|
+  tooltip-duration        	5000 	;;|500|
+  tooltip-size              25,25	;;|24 24|
+  chords-v2-min-idle        170    
+  tooltip-no-base           false ;; true
   notify-cfg-reload       	yes  	;;|yes|
   notify-cfg-reload-silent  yes 
   icon-match-layer-name   	yes  	;;|yes| match layer name to icon files even without an explicit (icon name.ico) config
@@ -18,58 +24,56 @@
 (defsrc
   esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc     nlck  kp/   kp*   kp-  
-  tab   q      w     e     r     t     y     u     i     o     p     [     ]     \        kp7   kp8   kp9        
+  tab   q      w     e     r     t     y     u     i     o     p     [     ]     \        kp7   kp8  kp9        
   caps  a      s     d     f     g     h     j     k     l     ;     '     ret            kp4   kp5   kp6   kp+  
-  lsft  z      x     c     v     b     n     m     ,     .     /     rsft                 kp1   kp2   kp3        
-  lctl  lmet   lalt              spc               ralt  rmet  rctl                       kp0   kp.         kprt 
+  lsft  z      x     c     v     b     n     m     ,     .     /     rsft  up             kp1   kp2   kp3        
+  lctl  lmet   lalt              spc               ralt  rmet  rctl  left  down  right    kp0   kp.         kprt 
 )
-
 
 (deflayer default
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    nlck  kp/   kp*   kp-  
-  tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   kp8   kp9                              
+  tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                              
   @cap   a      s     d     f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+                
-  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft               kp1   kp2   kp3                
-  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl                     kp0   kp.         kprt   
+  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3                
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
 
 (deflayer arrows
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    nlck  kp/   kp*   kp-                        
-  tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   kp8   kp9                                 
+  tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                                 
   @cap   left   down  right f     g     left  down  up    right ;     '     @ret          kp4   kp5   kp6   kp+                   
-  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft               kp1   kp2   kp3                   
-  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl                     kp0   kp.         kprt      
+  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3                   
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl left  down  right   kp0   kp.         kprt      
 )
 
 (deflayer numbers
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv   S-1    S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0   S--   S-=   bspc    nlck  kp/   kp*   kp-                        
-  0      1      2     3     4     5     6     7     8     9     0     [     ]     @bksl   kp7   kp8   kp9                              
+  @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
+  tab    1      2     3     4     5     6     7     8     9     0     [     ]     @bksl   kp7   @kp8  kp9                              
   @cap   4      5     6     f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+              
-  @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft               kp1   kp2   kp3              
-  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl                     kp0   kp.         kprt 
+  @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3              
+  @lctl  @lmet  @lalt             spc               ralt  rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
 
 (deflayer sym-win
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv   S-1    S-2   S-3   S-4   S-5   S-6   S-7   S-8   S-9   S-0   S--   S-=   bspc    nlck  kp/   kp*   kp-  
-  tab    1      2     3     r     t     y     u     i     9     0     S-[   S-]   @bksl   kp7   kp8   kp9        
-  @cap   4      5     6     f     g     h     j     k     l     S-;   S-'     @ret        kp4   kp5   kp6   kp+  
-  @lsft  7      8     9     v     b     n     m     S-,   S-.   S-/   @rsft               kp1   kp2   kp3        
-  @ctl   @rev   @lalt             spc               ralt  rmet  @rctl                     kp0   kp.         kprt 
+  @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
+  tab    1      2     3     r     t     y     u     i     9     0     S-[   S-]   @bksl   kp7   @kp8  kp9        
+  @cap   4      5     6     f     g     h     j     k     l     S-;   S-'   @ret          kp4   kp5   kp6   kp+  
+  @lsft  7      8     9     v     b     n     m     S-,   S-.   S-/   @rsft up            kp1   kp2   kp3        
+  @wctl  @rev   @lalt             spc               ralt  rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
 
 (deflayer lctl-layer
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    nlck  kp/   kp*   kp-                    
-  tab    C-q    C-w   C-e   r     t     y     u     i     o     p     [     ]     @bksl   kp7   kp8   kp9                             
+  tab    C-q    C-w   C-e   r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                             
   @cap   C-a    C-s   C-d   f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+               
-  @lsft  C-z    C-x   C-c   v     b     n     m     ,     .     /     @rsft               kp1   kp2   kp3               
-  @lctl  @rev  @lalt             spc               ralt  rmet  @rctl                      kp0   kp.         kprt 
+  @lsft  C-z    C-x   C-c   v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3               
+  @lctl  @rev  @lalt              spc               ralt  rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
-
 
 ;; (deflayermap (lctl-layer)
 ;;  q C-q
@@ -79,27 +83,58 @@
 ;;  c C-c
 ;;  )
 
+(defvirtualkeys
+  met (layer-while-held sym-win)
+  num (layer-while-held numbers)
+)
+
+(defalias 
+  hfd-win (hold-for-duration $tt-time met)
+  hfd-num (hold-for-duration $tt-time num)  
+)
+
 (defalias
-  esc         (tap-hold-press       300 300 esc    rmet)
-  cap         (tap-hold-press       200 200 esc    rctl)
-  grv         (tap-hold-press       300 300 grv    (layer-while-held arrows))
-  ret         (tap-hold             300 300 ret    esc)
-  bksl        (tap-hold-press       250 250 \      tab)
-  fnum        (tap-hold             150 200 f      (layer-while-held numbers))
-  lsft        (tap-hold-press       230 230 enter  lsft)    
-  lctl        (tap-hold             200 200 lctl   lctl)    
-  rctl        (tap-dance            200    (rctl   menu   rmet))    
-  rsft        (tap-hold-press       200 200 tab    rsft)    
-  lalt        (tap-dance            250    (lalt   (multi lctl lalt (layer-while-held numbers))))    
-  lmet        (tap-dance            250    (lmet   (layer-switch sym-win) menu lrld))   
+  esc         (tap-hold-press       300 300 esc   rmet)
+  cap         (tap-hold-press       200 200 esc   rctl)
+  grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
+  ret         (tap-hold             300 300 ret   esc)
+  bksl        (tap-hold-press       250 250 \     tab)
+  fnum        (tap-hold             150 200 f     (layer-while-held numbers))
+  lsft        (tap-hold-press       230 230 enter lsft)    
+  lctl        (tap-hold             200 200 lctl  lctl)    
+  rctl        (tap-dance            200    (rctl  menu     rmet))    
+  rsft        (tap-hold-press       200 200 tab   rsft)    
+  lalt        (tap-dance            250    (lalt  (multi 
+                                                    lctl lalt (layer-while-held numbers))))    
+  lmet        (tap-dance            250    (lmet  @hfd-win menu   lrld))   
   ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
   ;; tab         (tap-hold-press 200 200 tab    tab)
 )
 
+;; Numpad 
+(defalias
+  kp8         (tap-dance            200    (kp8   caps))
+  ;; ctl         (layer-while-held lctl-layer)
+)
+
 (defalias
   rev         (layer-switch default)    
-  ctl         (layer-while-held lctl-layer)
+  wctl        (layer-while-held lctl-layer)
+
+  cwt (caps-word-toggle 2000)
+  cct (caps-word-custom-toggle
+    2000
+    (a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9)
+    (kp0 kp1 kp2 kp3 kp4 kp5 kp6 kp7 kp8 kp9 bspc del up down left rght)
+  )
+    
 )
+
+(defchordsv2
+  (lsft rsft) @cct 200 all-released ()
+  (lctl rctl) @hfd-num 200 all-released ()
+)
+
 (defoverrides
   ;; (lctl caps) (lctl p)
   (lctl esc) (esc)
@@ -107,8 +142,3 @@
   (lsft kp0) (grv)
 )
 
-(defchordsv2
-  ;; (a s)    c                200 all-released  (arrows)
-  ;; (a s d) (macro h e l l o) 250 first-release (arrows)
-  ;; (s d f) (macro b y e)     400 first-release (arrows)
-)
