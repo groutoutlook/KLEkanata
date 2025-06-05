@@ -1,0 +1,70 @@
+;; https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs#L172 
+(defvar
+  tt-time 4000
+)
+
+(defcfg
+  danger-enable-cmd yes
+  process-unmapped-keys yes
+  windows-altgr add-lctl-release
+  concurrent-tap-hold yes
+  override-release-on-activation yes  
+  tooltip-layer-changes   	yes  	;;|false|
+  tooltip-show-blank      	yes  	;;|no|
+  tooltip-duration        	4000 	;;|500|
+  tooltip-size              25,25	;;|24 24|
+  chords-v2-min-idle        170    
+  tooltip-no-base           false ;; true
+  notify-cfg-reload       	yes  	;;|yes|
+  notify-cfg-reload-silent  yes 
+  icon-match-layer-name   	yes  	;;|yes| match layer name to icon files even without an explicit (icon name.ico) config
+;;  tray-icon base.png ;; will load C:\Users\<U>\AppData\Roaming\kanata\base.png  
+)
+
+(defsrc
+  esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc     nlck  kp/   kp*   kp-  
+  tab   q      w     e     r     t     y     u     i     o     p     [     ]     \        kp7   kp8  kp9        
+  caps  a      s     d     f     g     h     j     k     l     ;     '     ret            kp4   kp5   kp6   kp+  
+  lsft  z      x     c     v     b     n     m     ,     .     /     rsft  up             kp1   kp2   kp3        
+  lctl  lmet   lalt              spc               ralt  rmet  rctl  left  down  right    kp0   kp.         kprt 
+)
+
+(deflayer default
+  esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
+  grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc     nlck  kp/   kp*   kp-  
+  tab   q      w     e     r     t     y     u     i     o     p     [     ]     \        kp7   kp8  kp9        
+  caps  a      s     d     f     g     h     j     k     l     ;     '     ret            kp4   kp5   kp6   kp+  
+  lsft  z      x     c     v     b     n     m     ,     .     /     rsft  up             kp1   kp2   kp3        
+  lctl  lmet   lalt              spc               ralt  rmet  rctl  left  down  right    kp0   kp.         kprt 
+)
+
+(deflayermap mouse-layer
+  q @sm
+  w @ms↑
+  e mlft  
+  a @ms←
+  s @ms↓
+  d @ms→  
+)
+
+(defvirtualkeys
+    holdmouse (layer-while-held mouse-layer)
+)
+
+(defalias 
+  hfd-mou (hold-for-duration $tt-time holdmouse)
+)
+
+;; Mouse
+(defalias
+  sm (setmouse 10 10)
+  ms↑  (movemouse-accel-up 1 1 1 1 )
+  ms←  (movemouse-accel-left 1 1 1 1 )
+  ms↓  (movemouse-accel-down 1 1 1 1 )
+  ms→  (movemouse-accel-right 1 1 1 1 )      
+)
+
+(defchordsv2
+  (ralt rctl f g) @hfd-mou 200 all-released ()
+)

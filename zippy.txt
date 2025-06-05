@@ -1,0 +1,6 @@
+gi s	git␣status
+gi c	git checkout␣
+gi c b	git checkout -b␣
+gi c a	git commit --amend␣
+gi c n	git commit --amend --no-edit
+gi c a m	git commit --amend -m 'FIX_THIS_COMMIT_MESSAGE'
