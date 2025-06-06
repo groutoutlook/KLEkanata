@@ -51,18 +51,18 @@
 (deflayer numbers
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
-  tab    1      2     3     4     5     6     7     8     9     0     [     ]     @bksl   kp7   @kp8  kp9                              
-  @cap   4      5     6     f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+              
-  @lsft  7      8     9     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3              
+  tab    7      8     9     r     t     y     u     i     o     p     [     ]     @bksl   7     8     9                              
+  @cap   4      5     6     @clip g     h     j     k     l     ;     '     @ret          4     5     6     kp+              
+  @lsft  1      2     3     v     b     n     m     ,     .     /     @rsft up            1     2     3              
   @relc  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
 
 (deflayer sym-win
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
-  tab    1      2     3     r     t     y     u     i     o     p     S-[   S-]   @bksl   kp7   @kp8  kp9        
+  tab    7      8     9     r     t     y     u     i     o     p     S-[   S-]   @bksl   kp7   @kp8  kp9        
   @cap   4      5     6     f     g     h     j     k     l     S-;   S-'   @ret          kp4   kp5   kp6   kp+  
-  @lsft  7      8     9     v     b     n     m     S-,   S-.   S-/   @rsft up            kp1   kp2   kp3        
+  @lsft  1      2     3     v     b     n     m     S-,   S-.   S-/   @rsft up            kp1   kp2   kp3        
   @wctl  @rev   @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
 )
 
@@ -126,11 +126,13 @@
                                                   ))      
   lmet        (tap-dance            250    (lmet  @hfd-win lrld))   
   lsft        (tap-hold-press       230 230 ret   lsft)    
-  rctl        (tap-dance            230    (rctl  @mar  lmet))
-  ralt        (tap-dance            250    (ralt  (multi ralt rctl rsft)))
+  rctl        (tap-dance            230    (rctl  (tap-hold 200 200 @mar rmet)))
+  ralt        (tap-dance            250    (ralt  (multi ralt rctl rsft (layer-while-held numbers))))
   rsft        (tap-hold-press       200 200 tab   rsft)    
   ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
   ;; tab         (tap-hold-press 200 200 tab    tab)
+  clip        (tap-hold             350 350 (tap-dance 200 (f (unmod lctl grv))) (unmod lctl grv))
+  
 )
 
 ;; Numpad 
