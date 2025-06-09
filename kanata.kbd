@@ -1,6 +1,8 @@
 ;; https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs#L172 
 (defvar
   tt-time 4000
+  binpath "D:/usr/bin/"
+  screenpath (concat $binpath ScreenCapture)
 )
 
 (defcfg
@@ -13,10 +15,10 @@
   tooltip-show-blank      	yes  	;;|no|
   tooltip-duration        	5000 	;;|500|
   tooltip-size              25,25	;;|24 24|
-  chords-v2-min-idle        170    
+  chords-v2-min-idle        5
   tooltip-no-base           false ;; true
   notify-cfg-reload       	yes  	;;|yes|
-  notify-cfg-reload-silent  yes 
+  notify-cfg-reload-silent  no
   icon-match-layer-name   	yes  	;;|yes| match layer name to icon files even without an explicit (icon name.ico) config
 ;;  tray-icon base.png ;; will load C:\Users\<U>\AppData\Roaming\kanata\base.png  
 )
@@ -36,7 +38,7 @@
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                              
   @cap   a      s     d     f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+                
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3                
-  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
+  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt 
 )
 
 (deflayer arrows
@@ -45,25 +47,25 @@
   tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                                 
   @cap   left   down  right f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+                   
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3                   
-  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt      
+  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt      
 )
 
 (deflayer numbers
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
-  tab    7      8     9     r     t     y     u     i     o     p     [     ]     @bksl   7     8     9                              
-  @cap   4      5     6     @clip g     h     j     k     l     ;     '     @ret          4     5     6     kp+              
+  @grv   f1     f2    f3    f4    f5    @fsix f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
+  @tab   7      8     9     r     t     y     u     i     o     p     [     ]     @bksl   7     8     9                              
+  @cap   4      5     6     @clip g     h     j     k     l     ;     '     @ret          4     5     6     @kp+              
   @lsft  1      2     3     v     b     n     m     ,     .     /     @rsft up            1     2     3              
-  @relc  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
+  @relc  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt 
 )
 
 (deflayer sym-win
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
+  @grv   f1     f2    f3    f4    f5    @fsix f7    f8    f9    f10   f11   f12   bspc    nlck  kp/   kp*   kp-                        
   tab    7      8     9     r     t     y     u     i     o     p     S-[   S-]   @bksl   kp7   @kp8  kp9        
   @cap   4      5     6     f     g     h     j     k     l     S-;   S-'   @ret          kp4   kp5   kp6   kp+  
   @lsft  1      2     3     v     b     n     m     S-,   S-.   S-/   @rsft up            kp1   kp2   kp3        
-  @wctl  @rev   @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
+  @wctl  @rev   @lalt             spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt 
 )
 
 (deflayer lctl-layer
@@ -72,7 +74,7 @@
   tab    C-q    C-w   C-e   r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                             
   @cap   C-a    C-s   C-d   f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+               
   @lsft  C-z    C-x   C-c   v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3               
-  @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
+  @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt 
 )
  
 ;; (deflayer mouse-layer
@@ -81,7 +83,7 @@
 ;;   tab    @sm    @ms↑  mlft  r     t     y     u     i     o     p     [     ]     @bksl   kp7   @kp8  kp9                             
 ;;   @cap   @ms←   @ms↓  @ms→  f     g     h     j     k     l     ;     '     @ret          kp4   kp5   kp6   kp+               
 ;;   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            kp1   kp2   kp3               
-;;   @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   kp0   kp.         kprt 
+;;   @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   kp0   @kp.        kprt 
 ;; )
 (deflayermap mouse-layer
   q @sm
@@ -107,32 +109,63 @@
 )
 
 (defalias 
-  hfd-win (hold-for-duration $tt-time met)
-  hfd-num (hold-for-duration $tt-time num)
-  hfd-mou (hold-for-duration $tt-time holdmouse)
-  relc    (multi (on-press release-vkey num) (on-press release-vkey met))
+  hfd-win       (hold-for-duration $tt-time met)
+  hfd-num       (hold-for-duration $tt-time num)
+  hfd-mou       (hold-for-duration $tt-time holdmouse)
+  relc          (multi (on-press release-vkey num) (on-press release-vkey met))
+  screenshot    (cmd $screenpath --lang:en)
+  ;; powershell: type date-time as YYYY-MM-DD HH:MM
+  pdp (cmd-output-keys powershell.exe "echo '(' (((Get-Date -Format 'yyyy-MM-dd HH:mm').toCharArray() -join ' ').insert(20, ' spc ') -replace ':','S-;') ')'")
 )
 
 (defalias
-  mar         (multi menu (layer-while-held arrows))
+  mar         (multi (macro menu) (layer-while-held arrows))
   esc         (tap-hold-press       300 300 esc   rmet)
-  cap         (tap-dance            250     ((tap-hold-press 200 200 esc @mar) (tap-hold-press 200 200 esc (multi lctl lmet)) ))
+  cap         (tap-dance            250     (
+                (tap-hold 200 200 esc @mar) 
+                (tap-hold 200 200 esc (multi lctl lmet))
+              ))
   grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
   ret         (tap-hold             300 300 ret   esc)
   bksl        (tap-hold             250 250 \     \)
   lctl        (tap-hold             200 200 lctl  lctl)
-  lalt        (tap-dance            250    (lalt  (multi lctl lalt (layer-while-held numbers))
-                                                  (multi lctl lalt lsft (layer-while-held numbers))    
-                                                  ))      
-  lmet        (tap-dance            250    (lmet  @hfd-win lrld))   
+  lalt        (tap-dance            250    (lalt  
+              (multi lctl lalt (layer-while-held numbers) 
+              ;; INFO : which means hold shift first before double tap the lalt
+                (fork (tap-hold-press 500 500 nop0 (macro (unmod (lctl lalt) lctl grv) lctl lalt)) XX (lsft rsft lmet)) 
+              )
+              (multi lctl lalt lsft (layer-while-held numbers))    
+              )) 
+  ;; fnum        (tap-dance-eager      250    (f  @hfd-num))
+  lmet        (tap-dance            230    (lmet  @hfd-win lrld))   
   lsft        (tap-hold-press       230 230 ret   lsft)    
-  rctl        (tap-dance            230    (rctl  (tap-hold 200 200 @mar rmet)))
-  ralt        (tap-dance            250    (ralt  (multi ralt rctl rsft (layer-while-held numbers))))
-  rsft        (tap-hold-press       200 200 tab   rsft)    
+  rctl        (tap-dance            200    (rctl  (tap-hold 200 200 @mar rmet)))
+  ralt        (tap-dance            250    (ralt  
+              (multi ralt rctl rsft (layer-while-held numbers))
+              ))
+  rsft        (switch
+                ;; HACK: Due to WinJump cant map `tab` as a switch key, have to do it like that.
+                ((or (input real kp.) (key-history kp. 1))) (unmod lalt tab) break
+                ((layer numbers)) (tap-hold-press 200 200 m rsft) break
+                () (tap-hold-press       200 200 tab   rsft) break
+              )
   ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
-  ;; tab         (tap-hold-press 200 200 tab    tab)
+  tab         (switch
+                ;; HACK: Same reason above
+                ((layer numbers)) (tap-hold-press 250 250 S-m tab) break
+                () (tap-hold-press       200 200 tab   tab) break
+              )
   clip        (tap-hold             350 350 (tap-dance 200 (f (unmod lctl grv))) (unmod lctl grv))
-  
+  fsix        (macro f6 20 menu)
+  kp.         (tap-dance            220 ((tap-hold 200 200 kp. rctl) 
+                (multi ralt rctl rsft (layer-while-held numbers)))
+              )  
+  kp+         (switch
+                ((and (layer numbers) (input real kp.))) m break
+                ;; ((and (layer default) (input real kp.))) (unmod lalt tab) break
+                () kp+ break
+              )
+  ;; kp+         (fork kp+ m (ralt))
 )
 
 ;; Numpad 
@@ -165,12 +198,19 @@
 (defchordsv2
   (lsft rsft) @cct 200 all-released ()
   (lctl rctl) @hfd-num 200 all-released ()
+  (lmet lsft s) @screenshot 200 all-released ()
   (ralt rctl t g) @hfd-mou 200 all-released ()
+  ;; INFO : those I put here because couldnt think of anything better.
+  (lmet caps) (multi (macro menu) 
+                     (one-shot-press-pcancel $tt-time (layer-while-held arrows))
+              ) 
+              200 all-released ()
+  (lctl caps) esc 200 all-released ()
 )
 
 (defoverrides
   ;; (lctl caps) (lctl p)
-  (lctl esc) (esc)
+  ;; (lctl esc) (esc)
   (lmet esc) (esc)
   (lsft kp0) (grv)
 )
@@ -185,7 +225,9 @@
     ;; This should work for US international.
     ! S-1
     ? S-/
+    # S-3
     % S-5
+    * S-8
     "(" S-9
     ")" S-0
     : S-;
@@ -196,6 +238,5 @@
     _ S--
     ® AG-r
     ’ (no-erase `)
-    é (single-output ' e)
   )
 )
