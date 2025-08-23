@@ -94,6 +94,34 @@
   d @ms→  
 )
 
+(deflayermap numpad-numbers 
+kp0 @kp0
+kp1 @kp1
+kp2 @kp2
+kp3 @kp3
+kp4 @kp4
+kp5 @kp5
+kp6 @kp6
+kp7 @kp7
+kp8 @kp8
+kp9 @kp9
+kp+ @kp+
+kp- @kp-
+
+lalt @kp0
+z @kp1
+x @kp2
+c @kp3
+a @kp4
+s @kp5
+d @kp6
+q @kp7
+w @kp8
+e @kp9
+f @kp+
+- @kp+
+
+)
 ;; (deflayermap (lctl-layer)
 ;;  q C-q
 ;;  w C-w
@@ -116,7 +144,7 @@
   relc          (multi (on-press release-vkey num) (on-press release-vkey met))
   holdctlsft    (hold-for-duration $tt-time ctlsft)
   
-  ;; screenshot    (cmd $screenpath --lang:en)
+  screenshot    (cmd $screenpath --lang:en)
   ;; powershell: type date-time as YYYY-MM-DD HH:MM
   ;; pdp (cmd-output-keys powershell.exe "echo '(' (((Get-Date -Format 'yyyy-MM-dd HH:mm').toCharArray() -join ' ').insert(20, ' spc ') -replace ':','S-;') ')'")
 )
@@ -125,7 +153,7 @@
   mar         (multi (macro menu) (layer-while-held arrows))
   esc         (tap-hold-press       300 300 esc   rmet)
   cap         (tap-dance-eager      250 (
-                (tap-hold 250 250 esc @mar) 
+                (tap-hold 250 250 esc (layer-while-held arrows)) 
                 (tap-hold 250 250 (layer-while-held arrows) esc)));;(multi lctl lmet))
   grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
   ret         (tap-hold             300 300 ret   esc)
@@ -171,22 +199,22 @@
   kp+         (tap-dance-eager      200    (kp+   kp+))
 
 
-  kp1         (tap-hold             200 200 kp1   f1)
-  kp2         (tap-hold             200 200 kp2   f2)
-  kp3         (tap-hold             200 200 kp3   f3)
-  kp4         (tap-hold             200 200 kp4   f4)
-  kp5         (tap-hold             200 200 kp5   f5)
-  kp6         (tap-hold             200 200 kp6   f6)
-  kp7         (tap-hold             200 200 kp7   f7)
-  kp8         (tap-hold             200 200 (tap-dance-eager      200    (kp8   caps))   f8)
-  kp9         (tap-hold             200 200 kp9   f9)
-  kp0         (tap-hold             200 200 (tap-dance-eager      200    (kp0   rmet))   rmet)
+  kp1         (tap-hold             250 250 kp1   f1)
+  kp2         (tap-hold             250 250 kp2   f2)
+  kp3         (tap-hold             250 250 kp3   f3)
+  kp4         (tap-hold             250 250 kp4   f4)
+  kp5         (tap-hold             250 250 kp5   f5)
+  kp6         (tap-hold             250 250 kp6   f6)
+  kp7         (tap-hold             250 250 kp7   f7)
+  kp8         (tap-hold             250 250 (tap-dance-eager      200    (kp8   caps))   f8)
+  kp9         (tap-hold             250 250 kp9   f9)
+  kp0         (tap-hold             250 250 kp0   (multi rmet (layer-while-held numbers)))
   ;;kp0         (tap-dance-eager      220 ((tap-hold 220 220 kp0 rmet) rmet))
 
   kp.         (tap-dance            220 (
-                (tap-hold 200 200 kp. rctl) 
+                (tap-hold 200 200 kp. lctl) 
                 (multi ralt rctl rsft (layer-while-held numbers))
-                (multi ralt rctl (layer-while-held numbers)))
+                (multi ralt rctl (layer-while-held numpad-numbers)))
               )  
   ;;kp+         (switch
   ;;              ((and (layer numbers) (input real kp.))) m break
@@ -226,7 +254,7 @@
   (lsft rsft) @cct 200 all-released ()
   ;; (lctl rctl) @hfd-num 200 all-released ()
   ;; (lmet lsft s) @screenshot 200 all-released ()
-  ;; (lctl a s) @hfd-mou 200 first-release ()
+  ;; (d a s) @hfd-mou 200 first-release ()
   ;; INFO : those I put here because couldnt think of anything better.
   (lmet caps) (multi (macro menu) 
                      (one-shot-press-pcancel $tt-time (layer-while-held arrows))
