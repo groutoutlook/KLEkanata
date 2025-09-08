@@ -43,8 +43,8 @@
 
 (deflayer arrows
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
-  @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    @nlck @kp/  @kp*  @kp-                        
-  tab    q      up    e     r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                                 
+  @grv   pgup   2     pgdn  4     5     6     7     8     9     0     -     =     bspc    @nlck @kp/  @kp*  @kp-                        
+  tab    home   up    end   r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                                 
   @cap   left   down  right f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                   
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            @kp1  @kp2  @kp3                   
   @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt      
@@ -138,7 +138,7 @@ f @kp+
 )
 
 (defalias 
-  hfd-win       (hold-for-duration $tt-time met)
+  hfd-win       (hold-for-duration 500 met)
   hfd-num       (hold-for-duration $tt-time num)
   hfd-mou       (hold-for-duration $tt-time holdmouse)
   relc          (multi (on-press release-vkey num) (on-press release-vkey met))
@@ -171,13 +171,13 @@ f @kp+
   lsft        (tap-hold-press       230 230 ret   lsft)    
   rctl        (tap-dance            200    (rctl  (tap-hold 200 200 @mar rmet)))
   ralt        (tap-dance            250    (ralt  
-              (multi ralt rctl rsft (layer-while-held numbers))
+              (multi ralt rctl rsft )
               ))
   rsft        (switch
                 ;; HACK: Due to WinJump cant map `tab` as a switch key, have to do it like that.
                 ((or (input real kp.) (key-history kp. 1))) (unmod lalt tab) break
                 ((or rmet (key-history kp0 1))) rsft break
-                ((layer numbers)) (tap-hold-press 200 200 m rsft) break
+                ;; ((layer numbers)) (tap-hold-press 200 200 m rsft) break
                 () (tap-hold-press       200 200 tab   rsft) break
               )
   ;; spc         (tap-dance-eager      200    (spc spc (layer-while-held numbers)))
@@ -199,15 +199,15 @@ f @kp+
   kp+         (tap-dance-eager      200    (kp+   kp+))
 
 
-  kp1         (tap-hold             250 250 kp1   f1)
-  kp2         (tap-hold             250 250 kp2   f2)
-  kp3         (tap-hold             250 250 kp3   f3)
-  kp4         (tap-hold             250 250 kp4   f4)
-  kp5         (tap-hold             250 250 kp5   f5)
-  kp6         (tap-hold             250 250 kp6   f6)
-  kp7         (tap-hold             250 250 kp7   f7)
-  kp8         (tap-hold             250 250 (tap-dance-eager      200    (kp8   caps))   f8)
-  kp9         (tap-hold             250 250 kp9   f9)
+  kp1         (tap-hold             250 250 kp1   (macro f1))
+  kp2         (tap-hold             250 250 kp2   (macro f2))
+  kp3         (tap-hold             250 250 kp3   (macro f3))
+  kp4         (tap-hold             250 250 kp4   (macro f4))
+  kp5         (tap-hold             250 250 kp5   (macro f5))
+  kp6         (tap-hold             250 250 kp6   (macro f6))
+  kp7         (tap-hold             250 250 kp7   (macro f7))
+  kp8         (tap-hold             250 250 (tap-dance-eager      200    (kp8   caps))   (macro f8))
+  kp9         (tap-hold             250 250 kp9   (macro f9))
   kp0         (tap-hold             250 250 kp0   (multi rmet (layer-while-held numbers)))
   ;;kp0         (tap-dance-eager      220 ((tap-hold 220 220 kp0 rmet) rmet))
 
