@@ -152,9 +152,21 @@ f @kp+
 (defalias
   mar         (multi (macro menu) (layer-while-held arrows))
   esc         (tap-hold-press       300 300 esc   rmet)
-  cap         (tap-dance-eager      250 (
-                (tap-hold 250 250 esc (layer-while-held arrows)) 
-                (tap-hold 250 250 (layer-while-held arrows) esc)));;(multi lctl lmet))
+  ;; cap         (tap-dance      250 (
+  cap         (tap-dance-eager      250 ( 
+                (tap-hold 250 250
+                          ;; (fork esc (macro a enter) (lctl))
+                          (switch
+                            (lctl) (macro enter) break
+                            ((and lsft lctl)) (multi lsft enter) break
+                            () esc break
+                            )
+                          (layer-while-held arrows)) 
+                (tap-hold 250 250
+                          (fork esc (macro S-enter 5 (unmod esc) 5 (unmod enter)) (lctl))
+                          (layer-while-held arrows)
+                          ;;esc
+                          )));;(multi lctl lmet))
   grv         (tap-hold-press       300 300 grv   grv)
   ;; grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
   ret         (tap-hold             300 300 ret   esc)
@@ -261,7 +273,7 @@ f @kp+
                      (one-shot-press-pcancel $tt-time (layer-while-held arrows))
               ) 
               200 first-release ()
-  (lctl caps) (macro esc 20 enter v) 200 first-release ()
+  ;;; (lctl caps) (macro esc 20 enter v) 200 first-release ()
   (lctl lsft) (tap-dance 200 ((multi lsft lctl) @holdctlsft)) 
               200 first-release ()
   ;; (lctl lalt mlft) (macro lmet o k) 200 first-release ()
