@@ -155,7 +155,8 @@ f @kp+
   cap         (tap-dance-eager      250 (
                 (tap-hold 250 250 esc (layer-while-held arrows)) 
                 (tap-hold 250 250 (layer-while-held arrows) esc)));;(multi lctl lmet))
-  grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
+  grv         (tap-hold-press       300 300 grv   grv)
+  ;; grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
   ret         (tap-hold             300 300 ret   esc)
   bksl        (tap-hold             250 250 \     \)
   lctl        (tap-hold             200 200 lctl  lctl)
@@ -196,7 +197,7 @@ f @kp+
   kp/         (tap-dance-eager      200    (kp/   kp/))
   kp*         (tap-dance-eager      200    (kp*   kp*))
   kp-         (tap-dance-eager      200    (kp-   kp-))
-  kp+         (tap-dance-eager      200    (kp+   kp+))
+  ;; kp+         (tap-dance-eager      200    (kp+   kp+))
 
 
   kp1         (tap-hold             250 250 kp1   (macro f1))
@@ -217,11 +218,11 @@ f @kp+
                 (multi ralt rctl (layer-while-held numpad-numbers)))
               )  
   ;;kp+         (switch
-  ;;              ((and (layer numbers) (input real kp.))) m break
-  ;;              ;; ((and (layer default) (input real kp.))) (unmod lalt tab) break
+  ;;              ((and (layer numbers) (input real kp.))) tab break
+  ;;              ((and (layer default) (input real kp.))) (unmod lalt tab) break
   ;;              () kp+ break
   ;;            )
-  ;; kp+         (fork kp+ m (ralt))
+  kp+         (fork kp+ tab (lctl))
 
   ;;kp6         (tap-hold             200 200 kp6   f6)
   ;;kp7         (tap-dance-eager      200    (kp7   f7))
@@ -259,10 +260,11 @@ f @kp+
   (lmet caps) (multi (macro menu) 
                      (one-shot-press-pcancel $tt-time (layer-while-held arrows))
               ) 
-              200 all-released ()
-  (lctl caps) (macro esc 20 enter) 200 first-release ()
+              200 first-release ()
+  (lctl caps) (macro esc 20 enter v) 200 first-release ()
   (lctl lsft) (tap-dance 200 ((multi lsft lctl) @holdctlsft)) 
               200 first-release ()
+  ;; (lctl lalt mlft) (macro lmet o k) 200 first-release ()
 )
 
 (defoverrides
