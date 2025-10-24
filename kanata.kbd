@@ -273,6 +273,8 @@ f @kp+
                      (one-shot-press-pcancel $tt-time (layer-while-held arrows))
               ) 
               200 first-release ()
+  (rctl kp0) (multi rctl grv)
+              200 first-release ()
   ;;; (lctl caps) (macro esc 20 enter v) 200 first-release ()
   (lctl lsft) (tap-dance 200 ((multi lsft lctl) @holdctlsft)) 
               200 first-release ()
