@@ -229,12 +229,13 @@ f @kp+
                 (multi ralt rctl rsft (layer-while-held numbers))
                 (multi ralt rctl (layer-while-held numpad-numbers)))
               )  
-  ;;kp+         (switch
-  ;;              ((and (layer numbers) (input real kp.))) tab break
-  ;;              ((and (layer default) (input real kp.))) (unmod lalt tab) break
-  ;;              () kp+ break
-  ;;            )
-  kp+         (fork kp+ tab (lctl))
+  kp+         (switch
+                (lctl) tab break
+                (rsft) S-tab break
+                () kp+ break
+              )
+  ;; kp+         (fork kp+ tab (lctl))
+
 
   ;;kp6         (tap-hold             200 200 kp6   f6)
   ;;kp7         (tap-dance-eager      200    (kp7   f7))
