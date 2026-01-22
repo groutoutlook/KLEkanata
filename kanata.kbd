@@ -36,7 +36,7 @@
   @esc   f1     f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   del
   @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    @nlck @kp/  @kp*  @kp-  
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                              
-  @cap   a      s     d     f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                
+  @cap   @a     s     d     f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            @kp1  @kp2  @kp3                
   @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt 
 )
@@ -201,6 +201,7 @@ f @kp+
               )
   clip        (tap-hold             350 350 (tap-dance 200 (f (unmod lctl grv))) (unmod lctl grv))
   fsix        (macro f6 20 menu)
+  a           (tap-dance-eager 230 (a (fork a n (lmet))))  ;; turn out this works good under windows.
 )
 
 ;; Numpad 
