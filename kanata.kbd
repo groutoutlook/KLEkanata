@@ -145,6 +145,7 @@ f @kp+
   holdctlsft    (hold-for-duration $tt-time ctlsft)
   
   screenshot    (cmd $screenpath --lang:en)
+  showterm      (macro C-A-S-f1)
   ;; powershell: type date-time as YYYY-MM-DD HH:MM
   ;; pdp (cmd-output-keys powershell.exe "echo '(' (((Get-Date -Format 'yyyy-MM-dd HH:mm').toCharArray() -join ' ').insert(20, ' spc ') -replace ':','S-;') ')'")
 )
@@ -171,7 +172,7 @@ f @kp+
   ;; grv         (tap-hold-press       300 300 grv   (layer-while-held arrows))
   ret         (tap-hold             300 300 ret   esc)
   bksl        (tap-hold             250 250 \     \)
-  lctl        (tap-hold             200 200 lctl  lctl)
+  lctl        (tap-dance-eager      200    (lctl lctl @showterm))
   lalt        (tap-dance            250    (lalt  
               (multi lctl lalt (layer-while-held numbers) 
               ;; INFO : which means hold shift first before double tap the lalt
@@ -182,7 +183,7 @@ f @kp+
   ;; fnum        (tap-dance-eager      250    (f  @hfd-num))
   lmet        (tap-dance            230    (lmet  @hfd-win lrld))   
   lsft        (tap-hold-press       230 230 ret   lsft)    
-  rctl        (tap-dance            200    (rctl  (tap-hold 200 200 @mar rmet)))
+  rctl        (tap-dance-eager      200    (rctl @mar @showterm))
   ralt        (tap-dance            250    (ralt  
               (multi ralt rctl rsft )
               ))
