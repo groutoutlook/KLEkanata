@@ -34,3 +34,8 @@ test *args:
 [script]
 script:
     Write-Host "this is in powershell, without shebang syntax"
+
+alias ei:= edit-in-ide
+[group('dev')]
+edit-in-ide:
+    code .
