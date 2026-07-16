@@ -329,6 +329,9 @@ f @kp+
   (lmet kp8) (lmet 8)
   (lmet kp9) (lmet 9)
   (lmet kp0) (lmet 0)
+  (lctl lmet f10) (pp)
+  (lctl lmet f11) (prev)
+  (lctl lmet f12) (next)
 )
 
 
