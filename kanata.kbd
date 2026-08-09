@@ -176,7 +176,7 @@ f @kp+
   lalt        (tap-dance            250    (lalt  
               (multi lctl lalt (layer-while-held numbers) 
               ;; INFO : which means hold shift first before double tap the lalt
-                (fork (tap-hold-press 500 500 nop0 (macro (unmod (lctl lalt) lctl grv) lctl lalt)) XX (lsft rsft lmet)) 
+                (fork (tap-hold-press 500 500 nop0 (macro lctl lalt grv)) XX (lsft rsft lmet)) 
               )
               (multi lctl lalt lsft (layer-while-held numbers))    
               )) 
