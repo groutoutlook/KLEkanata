@@ -269,7 +269,7 @@ f @kp+
 (defchordsv2
   (lsft rsft) @cct 200 all-released ()
   ;; (lctl rctl) @hfd-num 200 all-released ()
-  ;; (lmet lsft s) @screenshot 200 all-released ()
+  (lmet lsft s) @screenshot 200 all-released ()
   ;; (d a s) @hfd-mou 200 first-release ()
   ;; INFO : those I put here because couldnt think of anything better.
   (lmet caps) (multi (macro menu) 
