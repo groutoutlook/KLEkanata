@@ -223,7 +223,8 @@ f @kp+
   kp7         (tap-hold             250 250 kp7   (macro f7))
   kp8         (tap-hold             250 250 (tap-dance-eager      200    (kp8   caps))   (macro f8))
   kp9         (tap-hold             250 250 kp9   (macro f9))
-  kp0         (tap-hold             250 250 kp0   (multi rmet (layer-while-held numbers)))
+  kp0         (tap-hold             250 250 (tap-dance-eager      200    (kp0   (fork kp0 grv (lctl))))
+                                              (multi rmet (layer-while-held numbers)))
   ;;kp0         (tap-dance-eager      220 ((tap-hold 220 220 kp0 rmet) rmet))
 
   kp.         (tap-dance            220 (
