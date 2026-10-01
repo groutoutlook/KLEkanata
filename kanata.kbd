@@ -37,7 +37,7 @@
   @grv   1      2     3     4     5     6     7     8     9     0     -     =     bspc    @nlck @kp/  @kp*  @kp-  
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                              
   @cap   @a     s     d     f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                
-  @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            @kp1  @kp2  @kp3                
+  @lsft  z      x     c     v     b     n     m     ,     @dot  /     @rsft up            @kp1  @kp2  @kp3                
   @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt 
 )
 
@@ -153,6 +153,7 @@ f @kp+
 (defalias
   mar         (multi (macro menu) (layer-while-held arrows))
   esc         (tap-hold-press       300 300 esc   rmet)
+  dot         (tap-dance-eager      200    (. . (macro bspc S-8)))
   ;; cap         (tap-dance      250 (
   cap         (tap-dance-eager      250 ( 
                 (tap-hold 250 250
