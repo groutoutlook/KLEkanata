@@ -310,7 +310,7 @@ f @kp+
   ;; (lctl caps) (lctl p)
   ;; (lctl esc) (esc)
   (lmet esc) (esc)
-  (lsft kp0) (grv)
+  (lsft kp0) (lsft ins)
   (rsft kp1) (lsft 1)
   (rsft kp2) (lsft 2)
   (rsft kp3) (lsft 3)
