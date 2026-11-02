@@ -38,7 +38,7 @@
   tab    q      w     e     r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                              
   @cap   @a     s     d     f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                
   @lsft  z      x     c     v     b     n     m     ,     @dot  /     @rsft up            @kp1  @kp2  @kp3                
-  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt 
+  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        @kprt 
 )
 
 (deflayer arrows
@@ -47,7 +47,7 @@
   tab    home   up    end   r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                                 
   @cap   left   down  right f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+                   
   @lsft  z      x     c     v     b     n     m     ,     .     /     @rsft up            @kp1  @kp2  @kp3                   
-  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt      
+  @lctl  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        @kprt      
 )
 
 (deflayer numbers
@@ -56,7 +56,7 @@
   @tab   7      8     9     r     t     y     u     i     o     p     [     ]     @bksl   7     8     9                              
   @cap   4      5     6     @clip g     h     j     k     l     ;     '     @ret          4     5     6     @kp+              
   @lsft  1      2     3     v     b     n     m     ,     .     /     @rsft up            1     2     3              
-  @relc  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0   @kp.        kprt 
+  @relc  @lmet  @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0   @kp.        @kprt 
 )
 
 (deflayer sym-win
@@ -65,7 +65,7 @@
   tab    7      8     9     r     t     y     u     i     o     p     S-[   S-]   @bksl   @kp7  @kp8  @kp9        
   @cap   4      5     6     f     g     h     j     k     l     S-;   S-'   @ret          @kp4  @kp5  @kp6  @kp+  
   @lsft  1      2     3     v     b     n     m     S-,   S-.   S-/   @rsft up            @kp1  @kp2  @kp3        
-  @wctl  @rev   @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt 
+  @wctl  @rev   @lalt             spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        @kprt 
 )
 
 (deflayer lctl-layer
@@ -74,7 +74,7 @@
   tab    C-q    C-w   C-e   r     t     y     u     i     o     p     [     ]     @bksl   @kp7  @kp8  @kp9                             
   @cap   C-a    C-s   C-d   f     g     h     j     k     l     ;     '     @ret          @kp4  @kp5  @kp6  @kp+               
   @lsft  C-z    C-x   C-c   v     b     n     m     ,     .     /     @rsft up            @kp1  @kp2  @kp3               
-  @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        kprt 
+  @lctl  @rev  @lalt              spc               @ralt rmet  @rctl left  down  right   @kp0  @kp.        @kprt 
 )
  
 ;; (deflayer mouse-layer
@@ -92,6 +92,11 @@
   a @ms←
   s @ms↓
   d @ms→  
+)
+
+;; Holding keypad Enter makes keypad 3 an immediate, held F3.
+(deflayermap kpenter-held
+  kp3 f3
 )
 
 (deflayermap numpad-numbers 
@@ -217,7 +222,9 @@ f @kp+
 
   kp1         (tap-hold             250 250 kp1   (tap-hold             250 750 f1 f11))
   kp2         (tap-hold             250 250 kp2   (tap-hold             250 750 f2 f12))
-  kp3         (tap-hold             250 250 kp3   (macro f3))
+  kp3         (tap-hold             250 250 kp3   f3)
+  ;; Tap: keypad Enter. Hold or press another key: Alt and the F3 layer.
+  kprt        (tap-hold-press       250 250 kprt  (multi lalt (layer-while-held kpenter-held)))
   kp4         (tap-hold             250 250 kp4   (macro f4))
   kp5         (tap-hold             250 250 kp5   (macro f5))
   kp6         (tap-hold             250 250 kp6   (macro f6))
